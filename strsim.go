@@ -26,6 +26,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/charles-haynes/strsim/internal/artists"
 	"github.com/xrash/smetrics"
 )
 
@@ -187,11 +188,11 @@ func main() {
 	}
 	for sim := range sims {
 		start := time.Now()
-		for _, n := range names {
-			sims[sim] += Similarity(n.a, n.b, sim)
+		for _, n := range groups.Names {
+			sims[sim] += Similarity(n[0], n[1], sim)
 		}
-		for _, a := range artists {
-			sims[sim] += ArtistsSimilarity(a.a, a.b, sim)
+		for _, a := range artists.Names {
+			sims[sim] += ArtistsSimilarity(a[0], a[1], sim)
 
 		}
 		fmt.Printf("%s took %s, avg %5.3f\n", sim, time.Since(start),
